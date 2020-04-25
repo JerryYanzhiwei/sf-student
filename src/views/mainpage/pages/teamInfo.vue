@@ -184,7 +184,9 @@ export default {
       const res = await this.PUT_MY_TEAM_INFO({
         instructor: this.teamInfo.instructor,
         instructorPhone: this.teamInfo.instructorPhone,
-        teamNo: this.teamInfo.teamNo
+        teamNo: this.teamInfo.teamNo,
+        teamIntroduction: this.teamInfo.teamIntroduction,
+        recruitmentDemand: this.teamInfo.recruitmentDemand
       })
       if (res.result === '0' && res.data) {
         this.$message.success('修改成功')

@@ -86,7 +86,7 @@ export default new Vuex.Store({
     },
     // 编辑团队信息
     async PUT_MY_TEAM_INFO ({ commit }, data = {}) {
-      const { data: res } = await axios.put(`/user/teamInfo?instructor=${data.instructor}&instructorPhone=${data.instructorPhone}&teamNo=${data.teamNo}`, data)
+      const { data: res } = await axios.put(`/user/teamInfo?instructor=${data.instructor}&instructorPhone=${data.instructorPhone}&teamNo=${data.teamNo}&teamIntroduction=${data.teamIntroduction}&recruitmentDemand=${data.recruitmentDemand}`)
       return res
     },
     // 团队申请列表
