@@ -65,6 +65,14 @@
           <span class="item_name">老师电话: </span>
             <el-input :disabled="!canEdit" size="mini" v-model="teamInfo.instructorPhone"></el-input>
         </div>
+        <div class="item">
+          <span class="item_name">团队介绍: </span>
+            <el-input :disabled="!canEdit" size="mini" v-model="teamInfo.teamIntroduction"></el-input>
+        </div>
+        <div class="item">
+          <span class="item_name">招募需求: </span>
+            <el-input :disabled="!canEdit" size="mini" v-model="teamInfo.recruitmentDemand"></el-input>
+        </div>
       </div>
       <div class="leader_bottom">
         <div class="item">
@@ -163,6 +171,14 @@ export default {
       }
       if (!this.teamInfo.instructorPhone) {
         this.$message.error('请填写老师电话')
+        return
+      }
+      if (!this.teamInfo.teamIntroduction) {
+        this.$message.error('请填写团队介绍')
+        return
+      }
+      if (!this.teamInfo.recruitmentDemand) {
+        this.$message.error('请填写招募需求')
         return
       }
       const res = await this.PUT_MY_TEAM_INFO({

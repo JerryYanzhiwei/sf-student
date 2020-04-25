@@ -239,7 +239,7 @@ export default {
     createTeam () {
       this.$refs.createForm.validate(async (valid) => {
         if (valid) {
-          this.formData.instructorPhone = Number(this.formData.instructorPhone)
+          this.formData.instructorPhone = this.formData.instructorPhone ? Number(this.formData.instructorPhone) : ''
           const params = this.formData
           const res = await this.POST_CREATE_TEAM(params)
           if (res.result === '0' && res.data) {
