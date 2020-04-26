@@ -5,6 +5,7 @@ import {
 } from 'element-ui'
 
 const origin = location.hostname === 'localhost' ? 'https://sf.shangzhaopin.com' : location.origin
+// const origin = 'https://sf.shangzhaopin.com'
 export const BASE_URL = origin + '/match-service'
 axios.defaults.baseURL = BASE_URL
 
@@ -27,6 +28,7 @@ export const instance = axios.create({
 
 axios.interceptors.request.use(
   config => {
+    config.url += /\?/g.test(config.url) ? '&_=' + new Date().getTime() : '?_=' + new Date().getTime()
     if (config.method === 'post' || config.method === 'put') {
       config.headers['Content-Type'] = 'application/json'
     }
