@@ -11,9 +11,7 @@
         </div>
         <div class="item">
           <span class="item_name">队伍: </span>
-          <el-tooltip class="item" effect="dark" :content="teamInfo.teamName" placement="top-start">
-            <span class="item_detail">{{teamInfo.teamName}}</span>
-          </el-tooltip>
+          <el-input :disabled="!canEdit" size="mini" v-model="teamInfo.teamName"></el-input>
         </div>
         <div class="item">
           <span class="item_name">队长: </span>
@@ -165,6 +163,10 @@ export default {
         this.canEdit = !this.canEdit
         return
       }
+      if (!this.teamInfo.teamName) {
+        this.$message.error('请填写队伍名称')
+        return
+      }
       if (!this.teamInfo.instructor) {
         this.$message.error('请填写指导老师')
         return
@@ -186,7 +188,8 @@ export default {
         instructorPhone: this.teamInfo.instructorPhone,
         teamNo: this.teamInfo.teamNo,
         teamIntroduction: this.teamInfo.teamIntroduction,
-        recruitmentDemand: this.teamInfo.recruitmentDemand
+        recruitmentDemand: this.teamInfo.recruitmentDemand,
+        teamName: this.teamInfo.teamName
       })
       if (res.result === '0' && res.data) {
         this.$message.success('修改成功')
