@@ -112,7 +112,7 @@ export default [
     ]
   },
   {
-    matchZone: '西北',
+    matchZone: '西南',
     code: 1005,
     province: [
       {
