@@ -55,6 +55,39 @@
                 @click="download(1)"></i>
       </p>
     </div>
+    <PublicTitle title="相关赛事文件下载"/>
+    <div class="user_contain ops_contain">
+      <p>
+        2020顺丰杯物流创新大赛大咖公开课内容提纲-包装
+        <i class="iconfont icon-xiazai1 download_btn"
+                @click="openModel(2)"></i>
+      </p>
+      <p>
+        2020顺丰杯物流创新大赛大咖公开课内容提纲-仓储
+        <i class="iconfont icon-xiazai1 download_btn"
+                @click="openModel(3)"></i>
+      </p>
+      <p>
+        2020顺丰杯物流创新大赛大咖公开课内容提纲-营运
+        <i class="iconfont icon-xiazai1 download_btn"
+                @click="openModel(4)"></i>
+      </p>
+      <p>
+        2020顺丰杯物流创新大赛赛事资料——航空
+        <i class="iconfont icon-xiazai1 download_btn"
+                @click="openModel(5)"></i>
+      </p>
+    </div>
+    <el-dialog
+      title="提示"
+      :visible.sync="dialogVisible"
+      width="30%">
+      <p class="tip_txt">该资料仅适用于2020“顺丰杯”物流创新大赛，未经主办方允许，资料内容不得向任何第三方披露，如不严谨保密，一经发现，主办方将保留法律诉讼权利！</p>
+      <el-checkbox v-model="checked">我已阅读并同意以上条款</el-checkbox>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="modelDown">确 定</el-button>
+      </span>
+    </el-dialog>
   </div>
 </template>
 
@@ -78,7 +111,10 @@ export default {
         grade: '',
         described: ''
       },
-      gender: ''
+      gender: '',
+      dialogVisible: false,
+      attachmentId: null,
+      checked: false
     }
   },
   created () {
@@ -87,6 +123,20 @@ export default {
   },
   methods: {
     ...mapActions(['GET_USER_INFO', 'PUT_USER_INFO', 'GET_DOWNLOAD_TEMPLATE']),
+    modelDown () {
+      if (!this.checked) {
+        this.$message.error('请勾选同意条款')
+        return
+      }
+      this.download(this.attachmentId)
+      this.dialogVisible = false
+    },
+    // 打开弹框
+    openModel (attachmentId) {
+      this.checked = false
+      this.attachmentId = attachmentId
+      this.dialogVisible = true
+    },
     // 下载附件
     async download (attachmentId) {
       this.GET_DOWNLOAD_TEMPLATE(attachmentId)
@@ -172,5 +222,11 @@ export default {
   .userInfo_container .user_contain .user_top div.el-textarea {
     vertical-align: top;
     margin: 0;
+  }
+  .el-dialog__body {
+    padding: 0 20px;
+  }
+  .tip_txt {
+    margin-bottom: 10px;
   }
 </style>
