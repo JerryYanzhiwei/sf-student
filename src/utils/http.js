@@ -20,7 +20,7 @@ axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded'
 // 上传图片
 export const instance = axios.create({
   baseURL: BASE_URL,
-  timeout: 100000,
+  timeout: 100000000,
   headers: {
     'Content-Type': 'multipart/form-data'
   }
